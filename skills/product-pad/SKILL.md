@@ -1,6 +1,6 @@
 ---
 name: product-pad
-description: Write, advance, and review a Product Alignment Document (PAD) — the Miro-style three-stage artifact (problem framing → solution framing → post-launch recap) that gates what gets built before any spec or code exists. Use this whenever a PM wants to frame an opportunity or problem, pitch a feature idea, prepare for a product alignment or product review meeting, write a one-pager / problem statement / opportunity brief / discovery doc, decide whether something is worth building, record a leadership decision on a proposal, or write a post-launch recap or retrospective on a shipped feature. Also trigger on "is this worth doing", "help me frame this", "we need to align on", "the exec review is Thursday", or any pasted idea, customer complaint, or support theme the PM wants turned into a proposal. It hands off approved problem framings to the `product-spec` skill.
+description: Write, advance, and review a Product Alignment Document (PAD) — the Miro-style three-stage artifact (problem framing → solution framing → post-launch recap) that gates what gets built before any spec or code exists. Use whenever a PM wants to frame an opportunity or problem, pitch a feature idea, prep for a product alignment or review meeting, write a one-pager / problem statement / opportunity brief, decide whether something is worth building, record a leadership decision, or write a post-launch recap. Also on "is this worth doing", "help me frame this", "the exec review is Thursday", any pasted idea or customer theme to turn into a proposal; on rendering a PAD into slides ("turn this PAD into a deck"); and on converting a PAD deck or PPTX back into the markdown PAD ("convert this deck to a PAD", "check this PPTX against the PAD format"). Hands approved framings to `product-spec`.
 ---
 
 # Product Alignment Document (PAD)
@@ -27,6 +27,8 @@ Stages are additive: one document, sections filled in over time, never rewritten
 - **Advance a PAD** — a problem framing has a recorded outcome and they want solution framing; or a feature shipped and they want the recap. Read the existing PAD first and fill only the next stage.
 - **Review a PAD** — they want the challenge the alignment meeting will give them, in advance. Skip to step 5 in review mode.
 - **Prep for the meeting** — they need the 2–3 slide summary and the likely questions. Step 6.
+- **Render a deck from a PAD** — they have the markdown and want slides: "turn this PAD into a deck", "slides for PAD-019", "make the review deck". See *Rendering and converting*.
+- **Convert a deck into a PAD** — they have slides (often with the substance in speaker notes) and want the markdown source of truth: "convert this PPTX to a PAD", "check this deck against the PAD format". See *Rendering and converting*.
 
 ### 2. Gather inputs (ask once, in one message)
 
@@ -37,7 +39,8 @@ Read what they supplied: customer notes, support tickets, analytics, competitive
 - Why it matters to the business: which strategy pillar, OKR, or segment it serves.
 - Target audience: a named persona or segment, not "users".
 - At least one success metric the team would accept as proof.
-- Two or more plausible directions. If the user arrives with one solution, make them name alternatives — a PAD with a single direction is a spec in disguise and the meeting will send it back.
+- Two or more plausible directions. If the user arrives with one solution, make them name alternatives — a PAD with a single direction is a spec in disguise and the meeting will send it back. Watch for the subtler version: several components of one approach listed as separate "directions".
+- Dependencies on other PADs or projects, in both directions (§1.9). A metric whose baseline needs another project to ship is fine, as long as the PAD says so and the providing PAD knows.
 
 **Stage 2 gates**
 - A recorded Stage 1 outcome of "proceed" or "approved with course corrections" (and the corrections). No outcome → ask whether the review happened; don't advance an unreviewed framing.
@@ -88,6 +91,27 @@ After the meeting, record the outcome in the PAD's Decision Log using the four s
 After a Stage 2 "proceed": tell the user the next step is the feature spec, and that the `product-spec` skill takes this PAD as its primary input (it will mine the problem, audience, metrics, chosen direction, and risks, and will refuse to proceed without a recorded outcome — so make sure the Decision Log is filled). Offer to start it.
 
 After a Stage 3 recap: suggest the quarterly recap session and offer to extract the learnings into a two-line entry for the team's learnings log.
+
+## Rendering and converting
+
+The markdown file in `pads/` is the PAD. A deck is a view of it for a meeting. Keeping that order matters: decks drift, speaker notes get lost, and only the markdown is something `product-spec` and `product-progress` can read.
+
+**Render (markdown → deck).** Two sizes, ask which if not obvious:
+
+- *Summary deck* — the three-slide review version from step 6: (1) problem, audience, why now; (2) evidence and success metrics; (3) directions — or for Stage 2: chosen direction, plan, risks. Under 30 minutes with Q&A.
+- *Full deck* — one slide per PAD section in template order, so reviewers can go deep: 1.1 problem · 1.3 audience · 1.4 evidence · 1.5 metrics · 1.6 landscape and what exists · 1.7 directions · 1.8 open questions · Decision Log. Six to eight slides for Stage 1; add 2.1–2.8 for Stage 2.
+
+Either way: slide text comes verbatim from the markdown (tightened, never reworded in meaning); anything the slide drops goes into that slide's speaker notes, with the section number, so the deck is lossless back to the PAD; bracketed placeholders stay bracketed; the PAD id and stage appear on every slide. Use the Slides artifact type or a slides skill when the session offers one; otherwise emit a `.pptx` via the pptx skill. Write the deck to `pads/decks/<pad-id>-<stage>-<date>.pptx` or link the artifact from the PAD header so the two stay paired. Never edit the deck by hand afterwards — change the markdown and re-render.
+
+**Convert (deck → markdown).** For PADs that were authored as slides:
+
+1. Extract every slide's text *and* speaker notes, in order. Notes usually hold the substance; treat them as body text, not commentary.
+2. Map content onto the template sections. A slide titled "Scope" or "What the first release covers" is usually Stage 2 §2.5 content appearing in a Stage 1 deck — place it there and flag it. "Possible directions" that are components of one solution go under one direction, and the gap in §1.7 is flagged. "What we don't know" without methods goes to §1.8 with `method: TBD` on each line.
+3. Anything that doesn't map (a table of raw numbers, an internal email quote) goes into an appendix in the markdown, not dropped.
+4. Create the header: id (assign the next free one if absent), owner, stage, status, dates from the deck footer; an empty Decision Log unless the deck records an outcome.
+5. Run the Stage checklist on the result and report pass / fixed / open. Then offer to render the summary deck back out so the author sees the round trip.
+
+Customer or account names found in a deck or its sources stay out of the markdown PAD unless the team's convention allows them; use counts and persona labels, and keep the named list as a linked source file under `pads/discovery/`.
 
 ## Bundled files
 

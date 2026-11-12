@@ -9,7 +9,9 @@
 | Design | |
 | Eng lead | |
 | GTM | |
+| Related PADs | PAD ids this one depends on, provides for, or shares a foundation with — one line each with the relationship |
 | Linked spec | `specs/<NNN>-<slug>/spec.md` (after Stage 2) |
+| Review deck | `pads/decks/<id>-<stage>-<date>.pptx` or artifact link — rendered from this file, never edited by hand |
 | Created | YYYY-MM-DD |
 | Last updated | YYYY-MM-DD |
 
@@ -39,15 +41,17 @@ Every claim with its source. Mark assumptions.
 
 ## 1.5 Success metrics
 
-What would prove this was worth doing. Baseline or a plan to measure one.
+What would prove this was worth doing. Baseline or a plan to measure one. A target may legitimately read `TBD — needs baseline from <source>; set at <review or date>` when the baseline depends on work that hasn't shipped; say so rather than inventing a number.
 
-| Metric | Baseline | Target | How measured |
-|---|---|---|---|
-| | | | |
+| Metric | Baseline | Target | How measured | Owner |
+|---|---|---|---|---|
+| | | | | |
 
 ## 1.6 Competitive & alternative landscape
 
 How users solve this today — competitors, workarounds, adjacent products. What they get right and wrong.
+
+**What exists today (internal prior art).** Mock-ups, proofs of concept, unsupported tooling, earlier research. Facts about what was built or learned, not a direction — directions go in 1.7.
 
 ## 1.7 Potential directions
 
@@ -62,6 +66,19 @@ Two or more genuinely different approaches. Include "do nothing" or "buy/partner
 ## 1.8 Open questions for discovery
 
 What we need to learn before solution framing, and how.
+
+| Question | Why it's open | Method (who, how many, by when) |
+|---|---|---|
+| | | |
+
+## 1.9 Dependencies on other work
+
+What this PAD needs from other PADs or projects before its metrics can be baselined or its directions chosen — and what other PADs need from this one. Name the PAD id and the specific thing (a count, a split, a capability), not just the project.
+
+| Direction | PAD / project | What exactly | Status |
+|---|---|---|---|
+| This needs | | | |
+| This provides for | | | |
 
 ---
 

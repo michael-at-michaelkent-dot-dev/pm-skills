@@ -1,0 +1,29 @@
+{
+  "name": "pm-skills",
+  "owner": {
+    "name": "Michael Kent"
+  },
+  "metadata": {
+    "description": "Product OS \u2014 nine skills for spec-driven, agent-assisted product development: PAD, spec, plan review, validation, progress, prototype, discovery synthesis, launch pack, constitution maintenance.",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "product-os",
+      "description": "The full Product OS skill set: decide (product-pad, discovery-synth, product-prototype), define (product-spec), confirm (plan-review, spec-validate), close (launch-pack), and always-on (product-progress, constitution-maintain).",
+      "version": "1.1.0",
+      "source": "./",
+      "skills": [
+        "./skills/product-pad",
+        "./skills/product-spec",
+        "./skills/spec-validate",
+        "./skills/product-progress",
+        "./skills/product-prototype",
+        "./skills/plan-review",
+        "./skills/discovery-synth",
+        "./skills/launch-pack",
+        "./skills/constitution-maintain"
+      ]
+    }
+  ]
+}

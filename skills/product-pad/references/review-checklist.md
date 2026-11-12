@@ -9,7 +9,10 @@ Run for the current stage before presenting a draft, and in review mode on PADs 
 2. **Audience is a named persona or segment**, with who is excluded. "Users" means the team hasn't chosen.
 3. **Business "why" names a pillar, OKR, or segment.** Without it leadership can't rank this against other PADs.
 4. **At least one success metric has a baseline or a measurement plan.** A metric with no baseline is a hope.
-5. **Two or more genuinely different directions.** Variants of one idea don't count. Single-direction PADs get approved as specs by accident.
+5. **Two or more genuinely different directions.** Variants of one idea don't count — five components of one approach listed as "directions" is still one direction. Single-direction PADs get approved as specs by accident.
+
+### Gates that apply once a review has happened
+5a. **Every review that has taken place has a Decision Log row with one of the four outcomes.** "v2 followed the review on the 11th" is not an outcome. Without the row, `product-spec` cannot tell whether it is allowed to start, and the PAD's own history is lost.
 
 ### Quality
 6. **Every claim in Evidence has a source and a confidence.** Reviewers trust a PAD that labels its assumptions; they distrust one that smooths them over.
@@ -17,7 +20,8 @@ Run for the current stage before presenting a draft, and in review mode on PADs 
 8. **No UI, flow, or architecture language in 1.1–1.6.** Move it to 1.7 as one option or cut it.
 9. **Competitive section describes how users cope today**, not just a list of competitors.
 10. **Open questions have a discovery method** (interviews, analytics, prototype test), not just a question mark.
-11. **Fits on two pages.** Longer means the team is substituting detail for decisions.
+11. **Fits on two pages.** Longer means the team is substituting detail for decisions. Two problems in one PAD is the usual cause — split them and link via Related PADs, even when they share a foundation.
+11a. **Cross-PAD dependencies are named in 1.9**, in both directions. A metric whose baseline depends on another project shipping says so; the providing PAD lists what it must deliver and for whom.
 
 ## Stage 2 — Solution framing
 
